@@ -1,0 +1,23 @@
+[build-system]
+requires = ["setuptools>=40.6.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "colorswatches"
+version = "0.1.0"
+description = "A tool to generate color swatches with hex codes."
+authors = [{name = "Your Name"}]
+license = "MIT"
+readme = "README.md"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+
+[tool.setuptools]
+packages = ["colorswatches"]
+include-package-data = true
+
+[project.urls]
+Source = "https://github.com/yourgithub/colorswatches"

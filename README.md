@@ -4,10 +4,7 @@
 ColorSwatches is a Python tool that allows you to generate an image of color swatches from hex codes provided via a command line or a file.
 
 ## Installation
-
-```bash
-pip install colorswatches
-```
+*Not yet available*
 
 ## Usage
 To use ColorSwatches, you can provide hex codes directly through the command line or via a file:

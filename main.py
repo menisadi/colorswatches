@@ -1,45 +1,49 @@
-from math import sqrt, ceil
 from PIL import Image, ImageDraw, ImageFont
+from math import sqrt, ceil
 
 
-def create_color_swatches(hex_codes, swatch_size=80):
+def create_color_swatches(hex_codes, swatch_size=80, scale=1):
+    # Scale up dimensions for higher resolution
+    swatch_size_scaled = swatch_size * scale
+    padding = 10 * scale
+
     # Calculate dimensions based on number of colors
-    colors_per_row = int(
-        ceil(sqrt(len(hex_codes)))
-    )  # Adjust this to fit more or fewer swatches per row
+    colors_per_row = int(ceil(sqrt(len(hex_codes))))
     num_rows = (
         len(hex_codes) + colors_per_row - 1
     ) // colors_per_row  # Ceiling division
-    padding = 10
-    width = colors_per_row * (swatch_size + padding) + padding
-    height = num_rows * (swatch_size + padding) + padding
+    width = colors_per_row * (swatch_size_scaled + padding) + padding
+    height = num_rows * (swatch_size_scaled + padding) + padding
 
     # Create an image with a white background
     image = Image.new("RGB", (width, height), "white")
     draw = ImageDraw.Draw(image)
 
-    # Load a font
-    try:
-        font = ImageFont.truetype("arial.ttf", 12)
-    except IOError:
-        font = ImageFont.load_default()
+    font_size = int(10 * scale)
+    font = ImageFont.truetype("RobotoMono.ttf", font_size)
 
-    # Draw each color swatch and write the hex code
+    # Finally, draw each color swatch and write the hex code
     x, y = padding, padding
     for hex_code in hex_codes:
-        draw.rectangle([x, y, x + swatch_size, y + swatch_size], fill=hex_code)
+        draw.rectangle(
+            [x, y, x + swatch_size_scaled, y + swatch_size_scaled],
+            fill=hex_code,
+        )
         text_color = (
             "white" if int(hex_code[1:], 16) < 0xAAAAAA else "black"
-        )  # Ensuring text visibility
+        )  # Pick white or black color to ensure text visibility
+        # Adjust text position based on scale
         draw.text(
-            (x + 5, y + swatch_size - 20), hex_code, font=font, fill=text_color
+            (x + scale * 5, y + swatch_size_scaled - scale * 20),
+            hex_code,
+            font=font,
+            fill=text_color,
         )
-        x += swatch_size + padding
-        if x > width - swatch_size - padding:
+        x += swatch_size_scaled + padding
+        if x > width - swatch_size_scaled - padding:
             x = padding
-            y += swatch_size + padding
+            y += swatch_size_scaled + padding
 
-    # Save and show the image
     image.save("color_swatches_with_codes.png")
     image.show()
 
@@ -66,4 +70,4 @@ hex_codes = [
     "#938AA9",
     "#7AA89F",
 ]
-create_color_swatches(hex_codes, 80)  # You can change the swatch size
+create_color_swatches(hex_codes, 80, 2)

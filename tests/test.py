@@ -1,7 +1,7 @@
 import unittest
 from tempfile import NamedTemporaryFile
 from PIL import Image
-from colorswatches.swatch_generator import create_color_swatches
+from colorswatches.swatch_generator import create_color_swatches, parse_hex_codes
 
 
 class TestSwatchGenerator(unittest.TestCase):

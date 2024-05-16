@@ -78,14 +78,19 @@ def create_color_swatches(
 def parse_hex_codes(file_path=None):
     """
     Parses a file containing hex codes into a list.
-    Each line in the file should contain one hex code.
+    Hex codes in the file can be separated by spaces and/or new lines.
+
+    Parameters:
+        file_path (str): The path to the file containing the hex codes.
+
+    Returns:
+        list of str: A list of hex codes.
     """
     hex_codes = []
     with open(file_path, "r") as file:
-        for line in file:
-            hex_code = line.strip()
-            if hex_code:
-                hex_codes.append(hex_code)
+        content = file.read()
+        # Split the content by any whitespace and filter out empty strings
+        hex_codes = [code for code in content.split() if code.strip()]
     return hex_codes
 
 

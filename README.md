@@ -38,5 +38,5 @@ Output the result as a PNG image.
 Contributions are welcome! Please feel free to submit a pull request.
 
 ## License
-This project is licensed under the MIT License - see the LICENSE file for details.
+This project is licensed under the GNU General Public License - see the LICENSE file for details.
 
